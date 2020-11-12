@@ -15,7 +15,6 @@
 #include<QMouseEvent>
 #include<QWheelEvent>
 #include <QStringList>
-
 #include <qgsscalecombobox.h>
 #include <qmainwindow.h>
 
@@ -48,7 +47,7 @@
 
 #include <qgsvectorlayerrenderer.h>
 #include <qgsrendercontext.h>
-
+#include "ui_ImageViewer.h"
 
 class ImageViewer : public QMainWindow
 {
@@ -56,30 +55,34 @@ class ImageViewer : public QMainWindow
 
 public:
 	ImageViewer(QWidget *parent = Q_NULLPTR);
-
+protected:
+	//void wheelEvent(QWheelEvent *event);
 private:
 	// create the menus and then add the actions to them.
+	Ui::ImageViewerClass ui;
 	QMenu *fileMenu;
 	QAction *openFileAction;
-
-
-	QLabel* m_scaleLabel; // 在状态栏中显示“scale 1:”
-	QgsScaleComboBox* m_scaleEdit; //! 在状态栏中显示比例尺值
-	QProgressBar* m_progressBar;
-	QLabel* m_coordsLabel; //! 在状态栏显示"Coordinate / Extent"
-	QLineEdit* m_coordsEdit; //! 在状态栏显示地理坐标
 	//map canvas
+	QString filename;
 	QgsMapCanvas *mapCanvas;
 	QList<QgsMapLayer *> layers;
-	void createStatusBar();
+	//void createStatusBar();
 public slots:
 	void on_openFileAction_triggered();
-	//void wheelEvent(QWheelEvent *event);
+	void Show_Coordinate(const QgsPointXY &p);
+	void Displayfeatures(const double a);
+	QgsVectorLayer * Lights(QString filename);
+	QgsVectorLayer * Seaare(QString filename);
+	QgsVectorLayer * LndarePolygon(QString filename);
+	QgsVectorLayer * Depcnt(QString filename);
+	QgsVectorLayer * Depare(QString filename);
+
+	//QgsVectorLayer* LndarePoint(QString filename);
+	//void Show(const QgsPointXY &p);
 	//
 	//void createStatusBar();
 public:
 	void addVectorLayer();
 	void addChartlayers();
-	
-	//void wheelEvent(QWheelEvent*event);
+	//QgsVectorLayer* lndare(QString filename);
 };
